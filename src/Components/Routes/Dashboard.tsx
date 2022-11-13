@@ -19,7 +19,14 @@ export default function Dashboard() {
 				<div className="heading">
 					<div className="title">Upcoming events</div>
 					<div className="filter">
-						<Dropdown text="Assigned to me" options={[]} />
+						<Dropdown
+							text="Assigned to me"
+							options={[
+								{ name: "Assigned to me", isChecked: true, onClick: () => {} },
+								{ name: "Assigned to me", onClick: () => {} },
+								{ name: "Assigned to me", onClick: () => {} },
+							]}
+						/>
 					</div>
 				</div>
 				<div className="cards">

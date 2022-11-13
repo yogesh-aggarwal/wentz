@@ -69,10 +69,6 @@
 				border: 1px solid var(--highlight-color);
 				box-shadow: 0 2px 10px var(--highlight-color);
 
-				&:first-of-type {
-					grid-column: span 2;
-				}
-
 				img.bg {
 					position: absolute;
 					top: 0;
@@ -84,6 +80,13 @@
 					z-index: -1;
 					pointer-events: none;
 					opacity: 0.75;
+				}
+
+				&:first-of-type {
+					grid-column: span 2;
+					img {
+						opacity: 1;
+					}
 				}
 
 				.info {
