@@ -1,5 +1,7 @@
+import { doc } from "firebase/firestore"
+import { db } from "../Firebase"
 import { Model } from "../Model"
-import { institutesStore } from "../State"
+import { institutesStore, instituteStore } from "../State"
 
 export interface Institute_t {
 	id: string
@@ -23,6 +25,16 @@ class _Institutes extends Model<Institute_t> {
 
 	public get collection(): string {
 		return this._collection
+	}
+
+	async Update(data: Partial<Institute_t>) {
+		await this.PerformBatch((batch) => {
+			batch.set(
+				doc(db, this.collection, instituteStore.currentValue()?.id ?? ""),
+				data,
+				{ merge: true }
+			)
+		})
 	}
 }
 
