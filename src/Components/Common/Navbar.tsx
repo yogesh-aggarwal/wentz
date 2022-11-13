@@ -23,7 +23,9 @@ export default function Navbar() {
 				<div className="logo">
 					<img src={Logo} alt="" />
 				</div>
-				<div className="routes">
+			</div>
+			<div className="routes">
+				<div className="wrapper">
 					{routes.map((route) => (
 						<div
 							key={route.name}
