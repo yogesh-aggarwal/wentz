@@ -64,16 +64,6 @@
 				&.active {
 					cursor: default;
 
-					&:after {
-						content: "";
-						position: absolute;
-						bottom: -2px;
-						left: -5px;
-						width: calc(100% + 10px);
-						height: 2px;
-						background-color: var(--slate2-color);
-					}
-
 					span {
 						display: unset;
 						color: var(--slate1-color);
