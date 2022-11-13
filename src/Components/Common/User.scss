@@ -22,4 +22,15 @@
 			font-size: 14px;
 		}
 	}
+
+	&.short {
+		img {
+			width: 28px;
+			height: 28px;
+		}
+
+		.info {
+			display: none;
+		}
+	}
 }
