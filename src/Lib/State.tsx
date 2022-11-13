@@ -19,7 +19,7 @@ export const [usersStore, useUsers] = makeStore<Map<User_t>>({})
 //----------------------------------------------------------------------------------------------
 /* 1. Routing */
 export const [routingStore, useRouting] = makeStore<string>(
-	location.href.split("/").slice(5).join("/")
+	location.href.split("/").slice(1).join("/")
 )
 /* 2. Theme */
 export const [themeStore, useTheme] = makeStore<ThemeType_t>(ThemeType_t.Light)

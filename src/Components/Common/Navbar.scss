@@ -41,6 +41,7 @@
 				align-items: center;
 				cursor: pointer;
 				opacity: 0.7;
+				position: relative;
 
 				* {
 					color: var(--slate2-color);
@@ -62,6 +63,16 @@
 
 				&.active {
 					cursor: default;
+
+					&:after {
+						content: "";
+						position: absolute;
+						bottom: -2px;
+						left: -5px;
+						width: calc(100% + 10px);
+						height: 2px;
+						background-color: var(--slate2-color);
+					}
 
 					span {
 						display: unset;

@@ -4,6 +4,7 @@ import { onMount, onUpdate } from "common-react-toolkit"
 import { lazy } from "react"
 import {
 	BrowserRouter,
+	Navigate,
 	Route,
 	Routes,
 	useLocation,
@@ -27,7 +28,7 @@ namespace Components {
 
 		// Routing
 		onUpdate(() => {
-			routingStore.set(location.pathname.split("/").slice(3).join("/"))
+			routingStore.set(location.pathname.split("/").slice(1).join("/"))
 		}, [location.pathname])
 		onUpdate(() => {
 			navigate(`/${currentLocalRoute}`)
@@ -50,7 +51,9 @@ export default function App() {
 				<BrowserRouter>
 					<Components.LifecycleMaintainer />
 					<Routes>
-						<Route path="" element={<Dashboard />} />
+						<Route path="" element={<Navigate to={"/dashboard"} replace />} />
+						<Route path="*" element={<Navigate to={"/dashboard"} replace />} />
+						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="/calendar" element={<Calendar />} />
 						<Route path="/faculties" element={<Faculties />} />
 						<Route path="/settings" element={<Settings />} />
