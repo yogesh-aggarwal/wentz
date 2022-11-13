@@ -7,6 +7,7 @@ import { useEvents, useRouting } from "../../Lib/State"
 import Icon from "../Common/Icon"
 import { visualDate, visualTime } from "../../Lib/Utilites"
 import User from "../Common/User"
+import Route from "../Builders/Route"
 
 export default function EventView() {
 	const events = useEvents()
@@ -20,7 +21,7 @@ export default function EventView() {
 
 	if (!event) return <></>
 	return (
-		<div className="EventViewComponent Route">
+		<Route className="EventViewComponent">
 			<img className="banner" src={event.banner} alt="" />
 			<div className="details">
 				<div className="top">
@@ -54,6 +55,6 @@ export default function EventView() {
 					<User id={event.createdBy} />
 				</div>
 			</div>
-		</div>
+		</Route>
 	)
 }

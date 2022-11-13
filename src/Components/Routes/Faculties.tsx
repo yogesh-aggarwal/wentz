@@ -2,10 +2,11 @@ import "./Faculties.scss"
 
 import Icon from "../Common/Icon"
 import User from "../Common/User"
+import Route from "../Builders/Route"
 
 export default function Faculties() {
 	return (
-		<div className="FacultiesComponent Route">
+		<Route className="FacultiesComponent">
 			<div className="action">
 				<Icon name="plus" bold />
 			</div>
@@ -38,6 +39,6 @@ export default function Faculties() {
 					<Icon name="menu-dots-vertical" />
 				</div>
 			</div>
-		</div>
+		</Route>
 	)
 }

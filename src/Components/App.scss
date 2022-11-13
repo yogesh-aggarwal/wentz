@@ -2,7 +2,12 @@ main {
 	display: grid;
 	grid-template-rows: min-content 1fr;
 
-	overflow-y: auto;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		width: 0px;
+		background: transparent;
+	}
 
 	height: 100vh;
 
@@ -10,5 +15,9 @@ main {
 		height: 100%;
 		overflow-y: auto;
 		padding: 30px 60px;
+
+		transform-origin: 50% 50%;
+		transition-duration: 100ms;
+		transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
 	}
 }

@@ -1,13 +1,14 @@
 import "./Calendar.scss"
 
-import Icon from "../Common/Icon"
-import User from "../Common/User"
-import { routingStore, useEvents } from "../../Lib/State"
-import { Map } from "../../Lib/Types/Misc"
-import { Event_t } from "../../Lib/Models/Events"
 import { If, makeStore } from "common-react-toolkit"
 import { MONTH_NAMES } from "../../Lib/Constants"
+import { Event_t } from "../../Lib/Models/Events"
+import { routingStore, useEvents } from "../../Lib/State"
+import { Map } from "../../Lib/Types/Misc"
 import { visualTime } from "../../Lib/Utilites"
+import Route from "../Builders/Route"
+import Icon from "../Common/Icon"
+import User from "../Common/User"
 
 const MILLISECONDS_IN_AN_HOUR = 3.6e6
 
@@ -40,7 +41,7 @@ export default function Calendar() {
 	const month = useMonthStore()
 
 	return (
-		<div className="CalendarComponent">
+		<Route className="CalendarComponent">
 			<div className="header">
 				<div className="month-select">
 					<div className="select">
@@ -190,6 +191,6 @@ export default function Calendar() {
 					</div>
 				))}
 			</div>
-		</div>
+		</Route>
 	)
 }

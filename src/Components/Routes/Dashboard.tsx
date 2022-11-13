@@ -5,12 +5,13 @@ import { visualDate } from "../../Lib/Utilites"
 import Dropdown from "../Common/Dropdown"
 import Icon from "../Common/Icon"
 import User from "../Common/User"
+import Route from "../Builders/Route"
 
 export default function Dashboard() {
 	const events = useEvents((events) => Object.values(events))
 
 	return (
-		<div className="DashboardComponent Route">
+		<Route className="DashboardComponent">
 			<div className="performance">
 				<div className="title">Usage distribution</div>
 			</div>
@@ -48,6 +49,6 @@ export default function Dashboard() {
 					))}
 				</div>
 			</div>
-		</div>
+		</Route>
 	)
 }
