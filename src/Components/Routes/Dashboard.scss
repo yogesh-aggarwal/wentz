@@ -42,6 +42,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+
+			margin-top: 25px;
 			margin-bottom: 25px;
 			padding-right: 60px;
 
@@ -55,14 +57,14 @@
 			gap: 30px;
 			display: grid;
 			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			grid-auto-rows: min-content;
 			overflow-y: auto;
 
 			padding-right: 60px;
 			padding-bottom: 30px;
 
 			.card {
-				min-height: 300px;
-				max-height: 40vh;
+				height: 280px;
 				position: relative;
 				border-radius: 35px;
 				cursor: pointer;
@@ -80,6 +82,25 @@
 					z-index: -1;
 					pointer-events: none;
 					opacity: 0.75;
+				}
+
+				.status {
+					position: absolute;
+					top: 2rem;
+					right: 2rem;
+					width: 10px;
+					height: 10px;
+					border-radius: 100%;
+
+					&.Approved {
+						background: green;
+					}
+					&.Pending {
+						background: #cf9f00;
+					}
+					&.Rejected {
+						background: red;
+					}
 				}
 
 				&:first-of-type {
@@ -122,6 +143,13 @@
 							font-weight: 600;
 							margin-top: 7px;
 							color: var(--slate2-color);
+						}
+
+						.timing {
+							font-size: 12px;
+							font-weight: 500;
+							color: var(--slate2-color);
+							margin-top: 4px;
 						}
 					}
 

@@ -1,9 +1,19 @@
 import uuid from "react-uuid"
 import { MONTH_NAMES } from "./Constants"
-import { userStore } from "./State"
+import { instituteStore, userStore } from "./State"
+
+export namespace UI {
+	export function closeDropdown() {
+		document.getElementById("close-dropdown")?.click()
+	}
+}
 
 export function getUserID(): string {
 	return userStore.currentValue()?.id ?? ""
+}
+
+export function getIsCoordinator(): boolean {
+	return instituteStore.currentValue()?.coordinator === getUserID()
 }
 
 export function generateID(): string {

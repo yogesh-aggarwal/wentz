@@ -20,11 +20,26 @@
 			.heading {
 				display: flex;
 				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 16px;
 
 				.name {
 					font-size: 36px;
 					font-weight: 700;
-					margin-bottom: 16px;
+				}
+
+				.status {
+					font-weight: 600;
+
+					&.Approved {
+						color: green;
+					}
+					&.Pending {
+						color: #ffae00;
+					}
+					&.Rejected {
+						color: red;
+					}
 				}
 			}
 
@@ -82,21 +97,44 @@
 		}
 
 		.bottom {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-
-			.place {
-				gap: 12px;
+			.actions {
+				gap: 10px;
 				display: flex;
 				align-items: center;
+				margin-bottom: 60px;
 
-				i {
-					font-size: 22px;
-				}
-				span {
-					font-size: 16px;
+				.action {
+					gap: 10px;
+					display: flex;
+					align-items: center;
+					cursor: pointer;
 					font-weight: 600;
+					padding: 10px 40px;
+					border-radius: 1.2rem;
+
+					&:first-of-type {
+						background: var(--primary-color);
+					}
+				}
+			}
+
+			.organizer {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+				.place {
+					gap: 12px;
+					display: flex;
+					align-items: center;
+
+					i {
+						font-size: 22px;
+					}
+					span {
+						font-size: 16px;
+						font-weight: 600;
+					}
 				}
 			}
 		}

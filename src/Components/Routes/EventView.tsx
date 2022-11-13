@@ -1,8 +1,8 @@
 import "./EventView.scss"
 
-import { onUpdate } from "common-react-toolkit"
+import { If, onUpdate } from "common-react-toolkit"
 import { useState } from "react"
-import { Event_t } from "../../Lib/Models/Events"
+import { EventRequestStatus, EventsDB, Event_t } from "../../Lib/Models/Events"
 import { useEvents, useRouting } from "../../Lib/State"
 import Icon from "../Common/Icon"
 import { visualDate, visualTime } from "../../Lib/Utilites"
@@ -27,6 +27,7 @@ export default function EventView() {
 				<div className="top">
 					<div className="heading">
 						<div className="name">{event.name}</div>
+						<div className={`status ${event.status}`}>{event.status}</div>
 					</div>
 					<div className="description">{event.description}</div>
 					<div className="additional">
@@ -48,11 +49,39 @@ export default function EventView() {
 					</div>
 				</div>
 				<div className="bottom">
-					<div className="place">
-						<Icon name="building" />
-						<span>Vivekananda Hall</span>
+					<If value={event.status === EventRequestStatus.Pending}>
+						<div className="actions">
+							<div
+								className="action"
+								onClick={() => {
+									EventsDB.Update(event.id, {
+										status: EventRequestStatus.Approved,
+									})
+								}}
+							>
+								<Icon name="check bold" size={13} />
+								<span>Approve</span>
+							</div>
+							<div
+								className="action"
+								onClick={() => {
+									EventsDB.Update(event.id, {
+										status: EventRequestStatus.Rejected,
+									})
+								}}
+							>
+								<Icon name="cross bold" size={11} />
+								<span>Reject</span>
+							</div>
+						</div>
+					</If>
+					<div className="organizer">
+						<div className="place">
+							<Icon name="building" />
+							<span>Vivekananda Hall</span>
+						</div>
+						<User id={event.createdBy} />
 					</div>
-					<User id={event.createdBy} />
 				</div>
 			</div>
 		</Route>

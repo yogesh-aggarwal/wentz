@@ -11,6 +11,12 @@ import { eventsStore, instituteStore } from "../State"
 import { generateID, getTimestamp, getUserID } from "../Utilites"
 import { InstitutesDB } from "./Institute"
 
+export enum EventRequestStatus {
+	Pending = "Pending",
+	Approved = "Approved",
+	Rejected = "Rejected",
+}
+
 export interface Event_t {
 	id: string
 	name: string
@@ -25,6 +31,7 @@ export interface Event_t {
 	endsAt: number
 
 	createdBy: string
+	status: EventRequestStatus
 }
 
 class _Events extends Model<Event_t> {
@@ -49,6 +56,7 @@ class _Events extends Model<Event_t> {
 			createdAt: getTimestamp(),
 			editedAt: getTimestamp(),
 			createdBy: getUserID(),
+			status: EventRequestStatus.Pending,
 		} as Event_t
 
 		console.log(data)
@@ -82,6 +90,12 @@ class _Events extends Model<Event_t> {
 					events: arrayRemove(id),
 				}
 			)
+		})
+	}
+
+	async Update(id: string, data: Partial<Event_t>) {
+		await this.PerformBatch((batch) => {
+			batch.set(doc(db, this.collection, id), data, { merge: true })
 		})
 	}
 }
