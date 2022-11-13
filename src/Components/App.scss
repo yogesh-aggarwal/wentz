@@ -21,3 +21,11 @@ main {
 		transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
 	}
 }
+
+.loading {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

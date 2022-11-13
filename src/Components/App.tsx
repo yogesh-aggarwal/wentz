@@ -5,14 +5,24 @@ import { lazy } from "react"
 import {
 	BrowserRouter,
 	Navigate,
+	Outlet,
 	Route,
 	Routes,
 	useLocation,
 	useNavigate,
+	useParams,
 } from "react-router-dom"
-import { initAuthListener } from "../Lib/Auth"
-import { routingStore, useRouting } from "../Lib/State"
+import { authWithGoogle, initAuthListener } from "../Lib/Auth"
+import { InstitutesDB } from "../Lib/Models/Institute"
+import {
+	instituteStore,
+	routingStore,
+	useInstitute,
+	useRouting,
+	useUser,
+} from "../Lib/State"
 import { initTheme } from "../Lib/Theme"
+import LoadingIndicator from "./Common/LoadingIndicator"
 import Navbar from "./Common/Navbar"
 
 const EventView = lazy(() => import("./Routes/EventView"))
@@ -29,13 +39,53 @@ namespace Components {
 
 		// Routing
 		onUpdate(() => {
-			routingStore.set(location.pathname.split("/").slice(1).join("/"))
+			routingStore.set(location.pathname.split("/").slice(2).join("/"))
 		}, [location.pathname])
 		onUpdate(() => {
-			navigate(`/${currentLocalRoute}`)
+			if (!instituteStore.currentValue()) return
+			navigate(
+				`/${instituteStore.currentValue()?.id ?? ""}/${currentLocalRoute}`
+			)
 		}, [currentLocalRoute])
 
 		return <></>
+	}
+
+	export function Institute() {
+		const { instituteID } = useParams()
+		const institute = useInstitute((institute) => ({
+			id: institute?.id,
+			faculties: institute?.faculties ?? [],
+			coordinator: institute?.coordinator ?? "",
+		}))
+		const userID = useUser((user) => user?.id ?? "")
+
+		onUpdate(() => InstitutesDB.Listen(instituteID ?? ""), [instituteID])
+
+		if (!institute.id)
+			return (
+				<div className="loading">
+					<LoadingIndicator />
+				</div>
+			)
+		if (
+			institute.coordinator !== userID &&
+			!institute.faculties.includes(userID)
+		)
+			return (
+				<div className="not-a-member">
+					<span>Not a member</span>
+				</div>
+			)
+
+		return (
+			<div className="AppComponent">
+				<main>
+					<Navbar />
+					<Outlet />
+				</main>
+			</div>
+		)
 	}
 }
 
@@ -45,23 +95,30 @@ export default function App() {
 		initAuthListener()
 	})
 
+	const userID = useUser((user) => user?.id)
+	if (!userID)
+		return (
+			<div className="login">
+				<div className="button" onClick={authWithGoogle}>
+					<span>Login</span>
+				</div>
+			</div>
+		)
+
 	return (
-		<div className="AppComponent">
-			<main>
-				<Navbar />
-				<BrowserRouter>
-					<Components.LifecycleMaintainer />
-					<Routes>
-						<Route path="" element={<Navigate to={"/dashboard"} replace />} />
-						<Route path="*" element={<Navigate to={"/dashboard"} replace />} />
-						<Route path="/events/:id" element={<EventView />} />
-						<Route path="/dashboard" element={<Dashboard />} />
-						<Route path="/calendar" element={<Calendar />} />
-						<Route path="/faculties" element={<Faculties />} />
-						<Route path="/settings" element={<Settings />} />
-					</Routes>
-				</BrowserRouter>
-			</main>
-		</div>
+		<BrowserRouter>
+			<Components.LifecycleMaintainer />
+			<Routes>
+				<Route path=":instituteID" element={<Components.Institute />}>
+					<Route path="" element={<Navigate to={"dashboard"} replace />} />
+					<Route path="*" element={<Navigate to={"dashboard"} replace />} />
+					<Route path="events/:id" element={<EventView />} />
+					<Route path="dashboard" element={<Dashboard />} />
+					<Route path="calendar" element={<Calendar />} />
+					<Route path="faculties" element={<Faculties />} />
+					<Route path="settings" element={<Settings />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
 	)
 }
