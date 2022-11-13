@@ -52,6 +52,6 @@ export const [routingStore, useRouting] = makeStore<string>(
 /* 2. Theme */
 export const [themeStore, useTheme] = makeStore<ThemeType_t>(ThemeType_t.Light)
 /* 2. Theme */
-export const [modalStore, useModal] = makeStore<React.ReactNode>(<></>)
+export const [modalStore, useModal] = makeStore<React.ReactNode | null>(null)
 
 //----------------------------------------------------------------------------------------------

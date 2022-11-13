@@ -25,6 +25,7 @@ import { initTheme } from "../Lib/Theme"
 import LoadingIndicator from "./Common/LoadingIndicator"
 import Navbar from "./Common/Navbar"
 import { EventsDB } from "../Lib/Models/Events"
+import Modal from "./Common/Modal"
 
 const EventView = lazy(() => import("./Routes/EventView"))
 const Dashboard = lazy(() => import("./Routes/Dashboard"))
@@ -110,6 +111,7 @@ export default function App() {
 
 	return (
 		<BrowserRouter>
+			<Modal />
 			<Components.LifecycleMaintainer />
 			<Routes>
 				<Route path=":instituteID" element={<Components.Institute />}>

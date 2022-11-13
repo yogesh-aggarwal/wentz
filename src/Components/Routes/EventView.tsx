@@ -5,7 +5,12 @@ import { useState } from "react"
 import { EventRequestStatus, EventsDB, Event_t } from "../../Lib/Models/Events"
 import { useEvents, useInstitute, useRouting, useUser } from "../../Lib/State"
 import Icon from "../Common/Icon"
-import { getIsCoordinator, visualDate, visualTime } from "../../Lib/Utilites"
+import {
+	getIsCoordinator,
+	UI,
+	visualDate,
+	visualTime,
+} from "../../Lib/Utilites"
 import User from "../Common/User"
 import Route from "../Builders/Route"
 
@@ -64,7 +69,17 @@ export default function EventView() {
 									<span>Edit</span>
 								</div>
 							</If>
-							<div className="action" onClick={() => {}}>
+							<div
+								className="action"
+								onClick={() => {
+									UI.openConfirmModal({
+										message: "Are you sure you want to delete this event?",
+										onConfirm: () => {
+											EventsDB.Delete(event.id)
+										},
+									})
+								}}
+							>
 								<Icon name="trash" size={11} />
 								<span>Delete</span>
 							</div>

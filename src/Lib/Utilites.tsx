@@ -1,10 +1,30 @@
 import uuid from "react-uuid"
 import { MONTH_NAMES } from "./Constants"
-import { instituteStore, userStore } from "./State"
+import { instituteStore, modalStore, userStore } from "./State"
 
 export namespace UI {
 	export function closeDropdown() {
 		document.getElementById("close-dropdown")?.click()
+	}
+
+	export function openConfirmModal(props: {
+		message: string
+		onConfirm: () => void
+	}) {
+		modalStore.set(
+			<>
+				<div className="title">Confirm</div>
+				<div className="description">{props.message}</div>
+				<div className="actions">
+					<div className="action" onClick={() => modalStore.set(null)}>
+						<span>Cancel</span>
+					</div>
+					<div className="action active" onClick={props.onConfirm}>
+						<span>Okay</span>
+					</div>
+				</div>
+			</>
+		)
 	}
 }
 
