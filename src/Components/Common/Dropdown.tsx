@@ -7,7 +7,7 @@ import Icon from "./Icon"
 import { If } from "common-react-toolkit"
 
 export default function Dropdown(props: {
-	children: React.ReactNode | React.ReactNode[]
+	children?: React.ReactNode | React.ReactNode[]
 	text?: string
 	options: {
 		name: string

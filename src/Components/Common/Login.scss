@@ -1,0 +1,68 @@
+.LoginComponent {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+
+	.form {
+		padding: 20px 18px;
+		border-radius: 22px;
+		border: 2px solid var(--highlight-color);
+		width: 28rem;
+
+		.logo {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 2rem;
+
+			img {
+				width: 52px;
+				height: 52px;
+			}
+		}
+
+		.input {
+			gap: 15px;
+			display: flex;
+			align-items: center;
+			padding: 15px 15px;
+			border-radius: 1rem;
+			margin-bottom: 0.5rem;
+
+			border: 2px solid var(--highlight-color);
+
+			&:focus-within {
+				border: 2px solid var(--primary-color);
+			}
+
+			input {
+				border: none;
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		.button {
+			gap: 12px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: var(--primary-color);
+			margin-top: 2rem;
+
+			border-radius: 1rem;
+			padding: 16px;
+			cursor: pointer;
+
+			i {
+				font-size: 13px;
+				margin-bottom: -1px;
+			}
+			span {
+				font-size: 15px;
+				font-weight: 600;
+			}
+		}
+	}
+}

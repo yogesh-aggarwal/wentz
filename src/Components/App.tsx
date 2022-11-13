@@ -26,6 +26,7 @@ import LoadingIndicator from "./Common/LoadingIndicator"
 import Navbar from "./Common/Navbar"
 import { EventsDB } from "../Lib/Models/Events"
 import Modal from "./Common/Modal"
+import Login from "./Common/Login"
 
 const EventView = lazy(() => import("./Routes/EventView"))
 const Dashboard = lazy(() => import("./Routes/Dashboard"))
@@ -100,14 +101,7 @@ export default function App() {
 	})
 
 	const userID = useUser((user) => user?.id)
-	if (!userID)
-		return (
-			<div className="login">
-				<div className="button" onClick={authWithGoogle}>
-					<span>Login</span>
-				</div>
-			</div>
-		)
+	if (!userID) return <Login />
 
 	return (
 		<BrowserRouter>

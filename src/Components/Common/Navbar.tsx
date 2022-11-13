@@ -5,6 +5,8 @@ import Logo from "../../Assets/logo.png"
 import Icon from "./Icon"
 import User from "./User"
 import { routingStore, useRouting, useUser } from "../../Lib/State"
+import Dropdown from "./Dropdown"
+import { logout } from "../../Lib/Auth"
 
 const routes: { name: string; icon: string; routes: string[] }[] = [
 	{ name: "Calendar", icon: "calendar", routes: ["calendar"] },
@@ -43,10 +45,12 @@ export default function Navbar() {
 				<div className="search">
 					<Icon name="search" />
 				</div>
-				<div className="user">
-					<User id={userID} />
-					<Icon name="angle-down" />
-				</div>
+				<Dropdown options={[{ name: "Logout", onClick: logout }]}>
+					<div className="user">
+						<User id={userID} />
+						<Icon name="angle-down" />
+					</div>
+				</Dropdown>
 			</div>
 		</div>
 	)
