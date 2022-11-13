@@ -45,9 +45,9 @@ export default function EventView() {
 								</span>
 							</div>
 						</div>
-						<div className="cta">
+						{/* <div className="cta">
 							<Icon name="angle-right" />
-						</div>
+						</div> */}
 					</div>
 				</div>
 				<div className="bottom">
@@ -58,10 +58,12 @@ export default function EventView() {
 						}
 					>
 						<div className="actions">
-							<div className="action" onClick={() => {}}>
-								<Icon name="edit" size={13} />
-								<span>Edit</span>
-							</div>
+							<If value={event.status !== EventRequestStatus.Rejected}>
+								<div className="action" onClick={() => {}}>
+									<Icon name="edit" size={13} />
+									<span>Edit</span>
+								</div>
+							</If>
 							<div className="action" onClick={() => {}}>
 								<Icon name="trash" size={11} />
 								<span>Delete</span>

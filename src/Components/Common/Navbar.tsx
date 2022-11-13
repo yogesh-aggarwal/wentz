@@ -7,10 +7,9 @@ import User from "./User"
 import { routingStore, useRouting, useUser } from "../../Lib/State"
 
 const routes: { name: string; icon: string; routes: string[] }[] = [
-	{ name: "Dashboard", icon: "home", routes: ["dashboard"] },
 	{ name: "Calendar", icon: "calendar", routes: ["calendar"] },
+	{ name: "Dashboard", icon: "home", routes: ["dashboard"] },
 	{ name: "Faculties", icon: "users", routes: ["faculties"] },
-	{ name: "Settings", icon: "settings", routes: ["settings"] },
 ]
 
 export default function Navbar() {

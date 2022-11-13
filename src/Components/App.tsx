@@ -30,7 +30,6 @@ const EventView = lazy(() => import("./Routes/EventView"))
 const Dashboard = lazy(() => import("./Routes/Dashboard"))
 const Calendar = lazy(() => import("./Routes/Calendar"))
 const Faculties = lazy(() => import("./Routes/Faculties"))
-const Settings = lazy(() => import("./Routes/Settings"))
 
 namespace Components {
 	export function LifecycleMaintainer() {
@@ -120,7 +119,6 @@ export default function App() {
 					<Route path="dashboard" element={<Dashboard />} />
 					<Route path="calendar" element={<Calendar />} />
 					<Route path="faculties" element={<Faculties />} />
-					<Route path="settings" element={<Settings />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

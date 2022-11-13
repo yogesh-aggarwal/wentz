@@ -1,4 +1,5 @@
 import { makeStore } from "common-react-toolkit"
+import React from "react"
 import { Event_t } from "./Models/Events"
 import { Institute_t } from "./Models/Institute"
 import { User_t } from "./Models/Users"
@@ -50,5 +51,7 @@ export const [routingStore, useRouting] = makeStore<string>(
 )
 /* 2. Theme */
 export const [themeStore, useTheme] = makeStore<ThemeType_t>(ThemeType_t.Light)
+/* 2. Theme */
+export const [modalStore, useModal] = makeStore<React.ReactNode>(<></>)
 
 //----------------------------------------------------------------------------------------------
