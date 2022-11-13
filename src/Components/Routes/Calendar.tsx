@@ -1,6 +1,7 @@
+import "./Calendar.scss"
+
 import Icon from "../Common/Icon"
 import User from "../Common/User"
-import "./Calendar.scss"
 
 export default function Calendar() {
 	return (
@@ -55,6 +56,9 @@ export default function Calendar() {
 			<div className="plot">
 				<div className="day">
 					<div className="info">
+						<div className="today">
+							<div className="indicator"></div>
+						</div>
 						<div className="group">
 							<div className="day-name">Mon</div>
 							<div className="date">21</div>

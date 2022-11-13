@@ -3,6 +3,8 @@
 	grid-template-rows: 100px 1fr;
 	overflow-y: auto;
 
+	height: 100%;
+
 	$border: 2px solid var(--highlight-color);
 	$grid-columns: 350px 1fr 1fr;
 
@@ -61,7 +63,7 @@
 
 			.time-grid {
 				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+				grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
 
 				.time-slot {
 					display: flex;
@@ -100,6 +102,26 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+
+				position: relative;
+
+				.today {
+					position: absolute;
+					top: 0;
+					left: 0;
+					height: 100%;
+
+					display: flex;
+					align-items: center;
+					margin-left: 2rem;
+
+					.indicator {
+						width: 10px;
+						height: 10px;
+						border-radius: 100%;
+						background: var(--slate2-color);
+					}
+				}
 
 				.group {
 					gap: 2px;
