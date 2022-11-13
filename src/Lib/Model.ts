@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore"
 import { authWithGoogle } from "./Auth"
 import { db } from "./Firebase"
+import { instituteStore } from "./State"
 import { Map } from "./Types/Misc"
 import { getUserID } from "./Utilites"
 
@@ -18,7 +19,9 @@ export class Model<T> {
 	private listeners: { [key: string]: Unsubscribe | (() => void) } = {}
 
 	public get collection(): string {
-		return `/${this._collection}`
+		return `/Institutes/${instituteStore.currentValue()?.id ?? ""}/${
+			this._collection
+		}`
 	}
 
 	constructor(meta: { collection: string; store: Store<Map<T>> }) {

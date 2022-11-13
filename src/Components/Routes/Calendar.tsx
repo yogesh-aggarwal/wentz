@@ -2,7 +2,7 @@ import "./Calendar.scss"
 
 import { If, makeStore } from "common-react-toolkit"
 import { MONTH_NAMES } from "../../Lib/Constants"
-import { Event_t } from "../../Lib/Models/Events"
+import { EventsDB, Event_t } from "../../Lib/Models/Events"
 import { routingStore, useEvents } from "../../Lib/State"
 import { Map } from "../../Lib/Types/Misc"
 import { visualTime } from "../../Lib/Utilites"
@@ -131,9 +131,7 @@ export default function Calendar() {
 							<div
 								key={`place-${placeIndex}`}
 								className="events"
-								onClick={() => {
-									console.log("make event")
-								}}
+								onClick={() => {}}
 							>
 								{(days[day] ?? [])
 									.filter((event) => event.placeIndex === placeIndex)

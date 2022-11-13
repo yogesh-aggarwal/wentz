@@ -1,8 +1,15 @@
-import { deleteDoc, doc, setDoc } from "firebase/firestore"
+import {
+	arrayRemove,
+	arrayUnion,
+	deleteDoc,
+	doc,
+	setDoc,
+} from "firebase/firestore"
 import { db } from "../Firebase"
 import { Model } from "../Model"
-import { eventsStore } from "../State"
-import { getTimestamp, getUserID } from "../Utilites"
+import { eventsStore, instituteStore } from "../State"
+import { generateID, getTimestamp, getUserID } from "../Utilites"
+import { InstitutesDB } from "./Institute"
 
 export interface Event_t {
 	id: string
@@ -28,10 +35,6 @@ class _Events extends Model<Event_t> {
 		})
 	}
 
-	public get collection(): string {
-		return this._collection
-	}
-
 	async Create(meta: {
 		name: string
 		banner: string
@@ -42,16 +45,44 @@ class _Events extends Model<Event_t> {
 	}) {
 		const data = {
 			...meta,
+			id: generateID(),
 			createdAt: getTimestamp(),
 			editedAt: getTimestamp(),
 			createdBy: getUserID(),
 		} as Event_t
 
-		await setDoc(doc(db, this.collection, data.id), data, { merge: true })
+		console.log(data)
+		console.log(this.collection)
+
+		await this.PerformBatch((batch) => {
+			batch.set(doc(db, this.collection, data.id), data, { merge: true })
+			batch.update(
+				doc(
+					db,
+					InstitutesDB.collection,
+					instituteStore.currentValue()?.id ?? ""
+				),
+				{
+					events: arrayUnion(data.id),
+				}
+			)
+		})
 	}
 
 	async Delete(id: string) {
-		await deleteDoc(doc(db, this.collection, id))
+		await this.PerformBatch((batch) => {
+			batch.delete(doc(db, this.collection, id))
+			batch.update(
+				doc(
+					db,
+					InstitutesDB.collection,
+					instituteStore.currentValue()?.id ?? ""
+				),
+				{
+					events: arrayRemove(id),
+				}
+			)
+		})
 	}
 }
 

@@ -24,6 +24,7 @@ import {
 import { initTheme } from "../Lib/Theme"
 import LoadingIndicator from "./Common/LoadingIndicator"
 import Navbar from "./Common/Navbar"
+import { EventsDB } from "../Lib/Models/Events"
 
 const EventView = lazy(() => import("./Routes/EventView"))
 const Dashboard = lazy(() => import("./Routes/Dashboard"))
@@ -36,6 +37,9 @@ namespace Components {
 		const navigate = useNavigate()
 		const location = useLocation()
 		const currentLocalRoute = useRouting()
+
+		const events = useInstitute((institute) => institute?.events ?? [])
+		onUpdate(() => EventsDB.ListenMany(events), [events])
 
 		// Routing
 		onUpdate(() => {

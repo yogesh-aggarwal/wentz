@@ -3,8 +3,12 @@ import "./Faculties.scss"
 import Icon from "../Common/Icon"
 import User from "../Common/User"
 import Route from "../Builders/Route"
+import { useInstitute } from "../../Lib/State"
 
 export default function Faculties() {
+	const faculties = useInstitute((institute) => institute?.faculties)
+
+	if (!faculties) return <></>
 	return (
 		<Route className="FacultiesComponent">
 			<div className="action">
@@ -14,30 +18,12 @@ export default function Faculties() {
 				<div className="title">Faculties</div>
 			</div>
 			<div className="faculties">
-				<div className="faculty">
-					<User id="" />
-					<Icon name="menu-dots-vertical" />
-				</div>
-				<div className="faculty">
-					<User id="" />
-					<Icon name="menu-dots-vertical" />
-				</div>
-				<div className="faculty">
-					<User id="" />
-					<Icon name="menu-dots-vertical" />
-				</div>
-				<div className="faculty">
-					<User id="" />
-					<Icon name="menu-dots-vertical" />
-				</div>
-				<div className="faculty">
-					<User id="" />
-					<Icon name="menu-dots-vertical" />
-				</div>
-				<div className="faculty">
-					<User id="" />
-					<Icon name="menu-dots-vertical" />
-				</div>
+				{faculties.map((faculty) => (
+					<div key={faculty} className="faculty">
+						<User id={faculty} />
+						<Icon name="menu-dots-vertical" />
+					</div>
+				))}
 			</div>
 		</Route>
 	)

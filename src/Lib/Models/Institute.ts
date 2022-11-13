@@ -9,6 +9,8 @@ export interface Institute_t {
 	createdAt: number
 	coordinator: string
 	faculties: string[]
+
+	events: string[]
 }
 
 class _Institutes extends Model<Institute_t> {
