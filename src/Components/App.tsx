@@ -15,6 +15,7 @@ import { routingStore, useRouting } from "../Lib/State"
 import { initTheme } from "../Lib/Theme"
 import Navbar from "./Common/Navbar"
 
+const EventView = lazy(() => import("./Routes/EventView"))
 const Dashboard = lazy(() => import("./Routes/Dashboard"))
 const Calendar = lazy(() => import("./Routes/Calendar"))
 const Faculties = lazy(() => import("./Routes/Faculties"))
@@ -53,6 +54,7 @@ export default function App() {
 					<Routes>
 						<Route path="" element={<Navigate to={"/dashboard"} replace />} />
 						<Route path="*" element={<Navigate to={"/dashboard"} replace />} />
+						<Route path="/events/:id" element={<EventView />} />
 						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="/calendar" element={<Calendar />} />
 						<Route path="/faculties" element={<Faculties />} />
