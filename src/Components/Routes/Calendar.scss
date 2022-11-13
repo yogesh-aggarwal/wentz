@@ -13,6 +13,8 @@
 		grid-template-columns: $grid-columns;
 		border-bottom: $border;
 
+		padding-right: 13px;
+
 		.month-select {
 			border-right: $border;
 
@@ -63,20 +65,15 @@
 
 			.time-grid {
 				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+				grid-template-columns: repeat(12, 1fr);
 
 				.time-slot {
 					display: flex;
 					align-items: center;
 					justify-content: center;
 					border-right: $border;
-					border-left: $border;
-
-					&:first-of-type {
-						border-left: none;
-					}
 					&:last-of-type {
-						border-right: none;
+						border-left: none;
 					}
 
 					color: var(--slate2-color);
@@ -96,6 +93,7 @@
 			display: grid;
 			grid-template-columns: $grid-columns;
 			border-bottom: $border;
+			height: 85px;
 
 			.info {
 				border-right: $border;
@@ -152,20 +150,30 @@
 			.events {
 				padding: 10px;
 				border-right: $border;
+				position: relative;
 
 				.event {
 					display: flex;
 					align-items: center;
 					justify-content: space-between;
 					cursor: pointer;
+					height: 100%;
 
-					padding: 8px 25px;
+					padding: 0 25px;
 					border-radius: 20px;
-
 					background: var(--primary-color);
+
+					position: absolute;
+					top: 10px;
+					height: 65px;
+					outline: 2px solid var(--background-color);
 
 					&.ongoing {
 						outline: 2px dashed var(--slate2-color);
+					}
+
+					&.diminished {
+						opacity: 0.5;
 					}
 
 					.event-info {

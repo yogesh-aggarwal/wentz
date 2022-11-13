@@ -47,12 +47,15 @@
 						align-items: center;
 						padding: 6px 0;
 
-						cursor: pointer;
+						* {
+							color: var(--slate2-color);
+						}
 
 						i {
 							font-size: 17px;
 						}
 						span {
+							cursor: pointer;
 							font-weight: 600;
 							font-size: 18px;
 						}

@@ -32,11 +32,13 @@ export default function EventView() {
 						<div className="timings">
 							<div className="date">
 								<Icon name="calendar" />
-								<span>{visualDate(event.scheduledAt)}</span>
+								<span>{visualDate(event.startsAt)}</span>
 							</div>
 							<div className="time">
 								<Icon name="clock" />
-								<span>{visualTime(event.scheduledAt)}</span>
+								<span>
+									{visualTime(event.startsAt)} to {visualTime(event.endsAt)}
+								</span>
 							</div>
 						</div>
 						<div className="cta">

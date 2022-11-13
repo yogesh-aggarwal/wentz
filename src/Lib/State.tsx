@@ -27,7 +27,8 @@ export const [eventsStore, useEvents] = makeStore<Map<Event_t>>({
 		editedAt: Date.now(),
 		createdBy: "1",
 		placeIndex: 0,
-		scheduledAt: Date.now(),
+		startsAt: 1667277000000,
+		endsAt: 1667302200000,
 	},
 	"2": {
 		id: "2",
@@ -40,7 +41,8 @@ export const [eventsStore, useEvents] = makeStore<Map<Event_t>>({
 		editedAt: Date.now(),
 		createdBy: "1",
 		placeIndex: 0,
-		scheduledAt: Date.now(),
+		startsAt: 1667374200000,
+		endsAt: 1667388600000,
 	},
 	"3": {
 		id: "3",
@@ -52,33 +54,36 @@ export const [eventsStore, useEvents] = makeStore<Map<Event_t>>({
 		createdAt: Date.now(),
 		editedAt: Date.now(),
 		createdBy: "1",
-		placeIndex: 0,
-		scheduledAt: Date.now(),
+		placeIndex: 1,
+		startsAt: 1667302200000,
+		endsAt: 1667313000000,
 	},
-	"4": {
-		id: "4",
-		name: "Enactus",
-		description:
-			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-		banner: "https://bit.ly/3hHMkvi",
-		createdAt: Date.now(),
-		editedAt: Date.now(),
-		createdBy: "1",
-		placeIndex: 0,
-		scheduledAt: Date.now(),
-	},
-	"5": {
-		id: "5",
-		name: "Enactus",
-		description:
-			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-		banner: "https://images.hdqwalls.com/wallpapers/windows-11-5k-light-l6.jpg",
-		createdAt: Date.now(),
-		editedAt: Date.now(),
-		createdBy: "1",
-		placeIndex: 0,
-		scheduledAt: Date.now(),
-	},
+	// "4": {
+	// 	id: "4",
+	// 	name: "Enactus",
+	// 	description:
+	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+	// 	banner: "https://bit.ly/3hHMkvi",
+	// 	createdAt: Date.now(),
+	// 	editedAt: Date.now(),
+	// 	createdBy: "1",
+	// 	placeIndex: 0,
+	// 	startsAt: Date.now(),
+	// 	endsAt: 0,
+	// },
+	// "5": {
+	// 	id: "5",
+	// 	name: "Enactus",
+	// 	description:
+	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+	// 	banner: "https://images.hdqwalls.com/wallpapers/windows-11-5k-light-l6.jpg",
+	// 	createdAt: Date.now(),
+	// 	editedAt: Date.now(),
+	// 	createdBy: "1",
+	// 	placeIndex: 0,
+	// 	startsAt: Date.now(),
+	// 	endsAt: 0,
+	// },
 })
 
 //----------------------------------------------------------------------------------------------

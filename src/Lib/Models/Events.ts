@@ -14,7 +14,8 @@ export interface Event_t {
 
 	createdAt: number
 	editedAt: number
-	scheduledAt: number
+	startsAt: number
+	endsAt: number
 
 	createdBy: string
 }
@@ -36,7 +37,8 @@ class _Events extends Model<Event_t> {
 		banner: string
 		description: string
 		placeIndex: number
-		scheduledAt: number
+		startsAt: number
+		endsAt: number
 	}) {
 		const data = {
 			...meta,

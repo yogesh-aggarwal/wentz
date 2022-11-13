@@ -41,7 +41,7 @@ export default function Dashboard() {
 									<div className="faculty">
 										<User short id={event.createdBy} />
 									</div>
-									<div className="date">{visualDate(event.scheduledAt)}</div>
+									<div className="date">{visualDate(event.startsAt)}</div>
 								</div>
 							</div>
 						</div>
