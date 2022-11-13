@@ -38,5 +38,7 @@ export function visualDate(timestamp: number, withYear?: boolean): string {
 
 export function visualTime(timestamp: number): string {
 	const date = new Date(timestamp)
-	return `${date.getHours()}:${date.getMinutes()}`
+	return `${date.getHours() > 12 ? date.getHours() - 12 : date.getHours()}:${
+		date.getMinutes() < 10 ? "0" : ""
+	}${date.getMinutes()} ${date.getHours() > 12 ? "PM" : "AM"}`
 }
