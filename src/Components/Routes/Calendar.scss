@@ -181,6 +181,16 @@
 							color: var(--slate2-color);
 						}
 					}
+
+					.actions {
+						gap: 30px;
+						display: flex;
+						align-items: center;
+
+						i {
+							font-size: 14px;
+						}
+					}
 				}
 			}
 		}

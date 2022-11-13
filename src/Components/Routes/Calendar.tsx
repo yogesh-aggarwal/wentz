@@ -70,8 +70,11 @@ export default function Calendar() {
 								<div className="name">Enactus</div>
 								<div className="time">9 AM - 10 AM</div>
 							</div>
-							<div className="booked-by">
-								<User id="" short />
+							<div className="actions">
+								<Icon name="menu-dots" bold />
+								<div className="booked-by">
+									<User id="" short />
+								</div>
 							</div>
 						</div>
 					</div>
