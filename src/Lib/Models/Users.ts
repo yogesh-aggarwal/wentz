@@ -17,7 +17,6 @@ export interface User_t {
 	dateCreated: number
 	dateUpdated: number
 	isVerified: boolean
-	role: UserRole_t
 }
 
 class _Users extends Model<User_t> {
@@ -42,7 +41,6 @@ class _Users extends Model<User_t> {
 			dateUpdated: getTimestamp(),
 			isVerified: false,
 			allowedPermissions: {},
-			role: UserRole_t.Faculty,
 		} as User_t
 
 		await setDoc(doc(db, this.collection, data.id), data, { merge: true })

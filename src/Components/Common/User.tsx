@@ -2,7 +2,7 @@ import "./User.scss"
 
 import { If, onUpdate } from "common-react-toolkit"
 import { UserRole_t, UsersDB } from "../../Lib/Models/Users"
-import { useUsers } from "../../Lib/State"
+import { useInstitute, useUsers } from "../../Lib/State"
 
 export default function User(props: {
 	id: string
@@ -15,6 +15,7 @@ export default function User(props: {
 		role: UserRole_t.Coordinator,
 	}
 	onUpdate(() => UsersDB.Listen(props.id), [props.id])
+	const coordinatorID = useInstitute((institute) => institute?.coordinator)
 
 	if (!user) return <></>
 	return (
@@ -24,7 +25,11 @@ export default function User(props: {
 				<div className="info">
 					<div className="name">{user.name}</div>
 					<If value={!props.hideRole}>
-						<div className="role">{user.role}</div>
+						<div className="role">
+							{user.id === coordinatorID
+								? UserRole_t.Coordinator
+								: UserRole_t.Faculty}
+						</div>
 					</If>
 				</div>
 			</If>

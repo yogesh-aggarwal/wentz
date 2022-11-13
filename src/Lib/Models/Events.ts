@@ -8,7 +8,12 @@ import {
 import { db } from "../Firebase"
 import { Model } from "../Model"
 import { eventsStore, instituteStore } from "../State"
-import { generateID, getTimestamp, getUserID } from "../Utilites"
+import {
+	generateID,
+	getIsCoordinator,
+	getTimestamp,
+	getUserID,
+} from "../Utilites"
 import { InstitutesDB } from "./Institute"
 
 export enum EventRequestStatus {
@@ -56,7 +61,9 @@ class _Events extends Model<Event_t> {
 			createdAt: getTimestamp(),
 			editedAt: getTimestamp(),
 			createdBy: getUserID(),
-			status: EventRequestStatus.Pending,
+			status: getIsCoordinator()
+				? EventRequestStatus.Approved
+				: EventRequestStatus.Pending,
 		} as Event_t
 
 		console.log(data)

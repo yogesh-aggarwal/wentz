@@ -3,9 +3,9 @@ import "./EventView.scss"
 import { If, onUpdate } from "common-react-toolkit"
 import { useState } from "react"
 import { EventRequestStatus, EventsDB, Event_t } from "../../Lib/Models/Events"
-import { useEvents, useRouting } from "../../Lib/State"
+import { useEvents, useInstitute, useRouting, useUser } from "../../Lib/State"
 import Icon from "../Common/Icon"
-import { visualDate, visualTime } from "../../Lib/Utilites"
+import { getIsCoordinator, visualDate, visualTime } from "../../Lib/Utilites"
 import User from "../Common/User"
 import Route from "../Builders/Route"
 
@@ -14,6 +14,8 @@ export default function EventView() {
 	const eventID = useRouting((route) => route.split("/")[1])
 
 	const [event, setEvent] = useState<Event_t | null>(null)
+	const userID = useUser((user) => user?.id)
+	useInstitute((institute) => institute?.coordinator)
 
 	onUpdate(() => {
 		setEvent(events[eventID])
@@ -49,7 +51,28 @@ export default function EventView() {
 					</div>
 				</div>
 				<div className="bottom">
-					<If value={event.status === EventRequestStatus.Pending}>
+					<If
+						value={
+							(getIsCoordinator() || event.createdBy === userID) &&
+							event.status !== EventRequestStatus.Pending
+						}
+					>
+						<div className="actions">
+							<div className="action" onClick={() => {}}>
+								<Icon name="edit" size={13} />
+								<span>Edit</span>
+							</div>
+							<div className="action" onClick={() => {}}>
+								<Icon name="trash" size={11} />
+								<span>Delete</span>
+							</div>
+						</div>
+					</If>
+					<If
+						value={
+							getIsCoordinator() && event.status === EventRequestStatus.Pending
+						}
+					>
 						<div className="actions">
 							<div
 								className="action"
