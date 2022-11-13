@@ -1,6 +1,6 @@
 import "./Calendar.scss"
 
-import { If, makeStore } from "common-react-toolkit"
+import { If, makeStore, onUpdate } from "common-react-toolkit"
 import { MONTH_NAMES } from "../../Lib/Constants"
 import { EventsDB, Event_t } from "../../Lib/Models/Events"
 import { routingStore, useEvents } from "../../Lib/State"
@@ -9,6 +9,7 @@ import { visualTime } from "../../Lib/Utilites"
 import Route from "../Builders/Route"
 import Icon from "../Common/Icon"
 import User from "../Common/User"
+import { useMemo, useState } from "react"
 
 const MILLISECONDS_IN_AN_HOUR = 3.6e6
 
@@ -28,17 +29,20 @@ const [yearStore, useYearStore] = makeStore<number>(
 )
 
 export default function Calendar() {
-	const days = useEvents((events) => {
+	const events = useEvents((events) => Object.values(events))
+	const year = useYearStore()
+	const month = useMonthStore()
+
+	const days = useMemo(() => {
 		const days: Map<Event_t[]> = {}
 		for (const event of Object.values(events)) {
 			const date = new Date(event.startsAt).getDate().toString()
 			if (!days[date]) days[date] = []
-			days[date].push(event)
+			if (new Date(event.startsAt).getMonth() + 1 === month)
+				days[date].push(event)
 		}
 		return days
-	})
-	const year = useYearStore()
-	const month = useMonthStore()
+	}, [events, year, month])
 
 	return (
 		<Route className="CalendarComponent">
