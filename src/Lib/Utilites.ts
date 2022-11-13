@@ -35,3 +35,8 @@ export function visualDate(timestamp: number, withYear?: boolean): string {
 			: ""
 	}`
 }
+
+export function visualTime(timestamp: number): string {
+	const date = new Date(timestamp)
+	return `${date.getHours()}:${date.getMinutes()}`
+}
