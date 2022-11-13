@@ -7,7 +7,8 @@ import Icon from "./Icon"
 import { If } from "common-react-toolkit"
 
 export default function Dropdown(props: {
-	text: string
+	children: React.ReactNode | React.ReactNode[]
+	text?: string
 	options: {
 		name: string
 		isChecked?: boolean
@@ -37,8 +38,11 @@ export default function Dropdown(props: {
 	return (
 		<div ref={dropdownRef} className="DropdownComponent">
 			<div className="trigger" onClick={() => setIsExpanded(!isExpanded)}>
-				<div className="text">{props.text}</div>
-				<Icon name="angle-down" />
+				<If value={props.text}>
+					<div className="text">{props.text}</div>
+					<Icon name="angle-down" />
+				</If>
+				<If value={!props.text}>{props.children}</If>
 			</div>
 			<AnimatePresence>
 				{isExpanded && (

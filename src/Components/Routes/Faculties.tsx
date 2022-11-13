@@ -1,9 +1,10 @@
 import "./Faculties.scss"
 
+import { useInstitute } from "../../Lib/State"
+import Route from "../Builders/Route"
+import Dropdown from "../Common/Dropdown"
 import Icon from "../Common/Icon"
 import User from "../Common/User"
-import Route from "../Builders/Route"
-import { useInstitute } from "../../Lib/State"
 
 export default function Faculties() {
 	const faculties = useInstitute((institute) => institute?.faculties)
@@ -21,7 +22,9 @@ export default function Faculties() {
 				{faculties.map((faculty) => (
 					<div key={faculty} className="faculty">
 						<User id={faculty} />
-						<Icon name="menu-dots-vertical" />
+						<Dropdown options={[{ name: "Remove", onClick: () => {} }]}>
+							<Icon name="menu-dots-vertical" />
+						</Dropdown>
 					</div>
 				))}
 			</div>
