@@ -17,6 +17,7 @@ export const MONTH_NAMES = [
 	"Nov",
 	"Dec",
 ]
+export const WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 export const BANNERS = [
 	"https://images.hdqwalls.com/wallpapers/windows-11-5k-light-l6.jpg",

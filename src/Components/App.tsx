@@ -27,11 +27,10 @@ import Navbar from "./Common/Navbar"
 import { EventsDB } from "../Lib/Models/Events"
 import Modal from "./Common/Modal"
 import Login from "./Common/Login"
-
-const EventView = lazy(() => import("./Routes/EventView"))
-const Dashboard = lazy(() => import("./Routes/Dashboard"))
-const Calendar = lazy(() => import("./Routes/Calendar"))
-const Faculties = lazy(() => import("./Routes/Faculties"))
+import EventView from "./Routes/EventView"
+import Dashboard from "./Routes/Dashboard"
+import Calendar from "./Routes/Calendar"
+import Faculties from "./Routes/Faculties"
 
 namespace Components {
 	export function LifecycleMaintainer() {
