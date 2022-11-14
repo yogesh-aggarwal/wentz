@@ -1,6 +1,6 @@
 import "./CreateEvent.scss"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { modalStore, useEvents } from "../../Lib/State"
 import Icon from "../Common/Icon"
 import { EventsDB } from "../../Lib/Models/Events"
@@ -16,6 +16,19 @@ export default function CreateEvent(props: {
 	const [startTime, setStartTime] = useState<number>(9)
 	const [endTime, setEndTime] = useState<number>(23)
 	const [date, setDate] = useState<string>(props.date)
+
+	useEffect(() => {
+		function escCloseWorker(event: KeyboardEvent) {
+			if (event.ctrlKey && event.key === "Enter") {
+				document.getElementById("submit")?.click()
+			}
+		}
+		document.addEventListener("keydown", escCloseWorker)
+
+		return () => {
+			document.removeEventListener("keydown", escCloseWorker)
+		}
+	})
 
 	const occupiedSlots = useEvents((events) => {
 		const occupied: {
@@ -43,6 +56,7 @@ export default function CreateEvent(props: {
 		<div className="CreateEventComponent">
 			<div className="title">Create Event</div>
 			<input
+				autoFocus
 				type="text"
 				value={title}
 				placeholder="Title"
@@ -115,7 +129,7 @@ export default function CreateEvent(props: {
 						.map((i) => i + 9)
 						.map((i) => {
 							const occupied =
-								occupiedSlots[placeIndex][new Date(date).getDate()]
+								occupiedSlots[placeIndex][new Date(date).getDate()] ?? []
 							let maxEnd = 0
 							for (const end of occupied) {
 								if (end > startTime) {
@@ -148,6 +162,7 @@ export default function CreateEvent(props: {
 					<span>Cancel</span>
 				</div>
 				<div
+					id="submit"
 					className={`action active ${
 						!title.trim().length ||
 						!description.trim().length ||

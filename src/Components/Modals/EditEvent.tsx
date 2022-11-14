@@ -1,7 +1,7 @@
 import "./EditEvent.scss"
 
 import { modalStore, useEvents } from "../../Lib/State"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { EventsDB } from "../../Lib/Models/Events"
 
 export default function EditEvent(props: { eventID: string }) {
@@ -10,11 +10,25 @@ export default function EditEvent(props: { eventID: string }) {
 	const [title, setTitle] = useState(event?.name ?? "")
 	const [description, setDescription] = useState(event?.description ?? "")
 
+	useEffect(() => {
+		function escCloseWorker(event: KeyboardEvent) {
+			if (event.ctrlKey && event.key === "Enter") {
+				document.getElementById("submit")?.click()
+			}
+		}
+		document.addEventListener("keydown", escCloseWorker)
+
+		return () => {
+			document.removeEventListener("keydown", escCloseWorker)
+		}
+	})
+
 	if (!event) return <> </>
 	return (
 		<div className="EditEventComponent">
 			<div className="title">Edit Event</div>
 			<input
+				autoFocus
 				type="text"
 				value={title}
 				placeholder="Title"
@@ -30,6 +44,7 @@ export default function EditEvent(props: { eventID: string }) {
 					<span>Cancel</span>
 				</div>
 				<div
+					id="submit"
 					className={`action active ${
 						!title.trim().length || !description.trim().length ? "disabled" : ""
 					}`}
