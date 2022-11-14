@@ -137,7 +137,7 @@ export default function CreateEvent(props: {
 									break
 								}
 							}
-							const isAvailable = i <= maxEnd && i > startTime
+							const isAvailable = (i <= maxEnd || !maxEnd) && i > startTime
 
 							return (
 								<div

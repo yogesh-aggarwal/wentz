@@ -44,6 +44,7 @@ namespace Components {
 
 		useEffect(() => {
 			function escCloseWorker(event: KeyboardEvent) {
+				if (event.key === "Escape") routingStore.set("dashboard")
 				if (event.key === "F1") {
 					event.preventDefault()
 					routingStore.set("calendar")

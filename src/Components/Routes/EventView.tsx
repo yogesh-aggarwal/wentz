@@ -28,22 +28,17 @@ export default function EventView() {
 
 	const [event, setEvent] = useState<Event_t | null>(null)
 	const userID = useUser((user) => user?.id)
+	const eventIDS = useInstitute((institute) => institute?.events ?? [])
 	useInstitute((institute) => institute?.coordinator)
 
 	onUpdate(() => {
 		setEvent(events[eventID])
 	}, [eventID, events])
 
-	useEffect(() => {
-		function escCloseWorker(event: KeyboardEvent) {
-			if (event.key === "Escape") routingStore.set("dashboard")
-		}
-		document.addEventListener("keydown", escCloseWorker)
-
-		return () => {
-			document.removeEventListener("keydown", escCloseWorker)
-		}
-	})
+	onUpdate(() => {
+		if (eventIDS.includes(eventID)) return
+		routingStore.set("/dashboard")
+	}, [eventIDS, eventID])
 
 	if (!event) return <></>
 	return (

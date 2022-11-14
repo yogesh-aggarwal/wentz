@@ -1,13 +1,15 @@
 import "./Dashboard.scss"
 
+import { makeStore } from "common-react-toolkit"
+import { EventRequestStatus } from "../../Lib/Models/Events"
 import { routingStore, useEvents } from "../../Lib/State"
 import { getUserID, UI, visualDate, visualTime } from "../../Lib/Utilites"
+import Route from "../Builders/Route"
+import PerformanceChart from "../Common/Chart"
 import Dropdown from "../Common/Dropdown"
 import Icon from "../Common/Icon"
 import User from "../Common/User"
-import Route from "../Builders/Route"
-import { makeStore } from "common-react-toolkit"
-import { EventRequestStatus } from "../../Lib/Models/Events"
+import { useState } from "react"
 
 enum FilterType {
 	All = "All",
@@ -28,14 +30,38 @@ export default function Dashboard() {
 	const filterType = useFilterType()
 	const events = useEvents((events) => Object.values(events))
 
+	const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+
 	return (
 		<Route className="DashboardComponent">
 			<div className="performance">
-				<div className="title">Usage distribution</div>
+				<div className="header">
+					<div className="title">Conduction Distribution</div>
+					<Dropdown
+						text={selectedYear.toString()}
+						options={Array.from(Array(5).keys())
+							.map((year) => year + new Date().getUTCFullYear())
+							.map((year) => ({
+								name: year.toString(),
+								isChecked: year === selectedYear,
+								onClick: () => {
+									setSelectedYear(year)
+									UI.closeDropdown()
+								},
+							}))}
+					></Dropdown>
+				</div>
+				<div className="chart">
+					<PerformanceChart year={selectedYear} />
+				</div>
 			</div>
 			<div className="events">
 				<div className="heading">
-					<div className="title">Upcoming events</div>
+					<div className="title">
+						{filterType === FilterType.PastEvents
+							? "Past Events"
+							: "Upcoming events"}
+					</div>
 					<div className="filter">
 						<Dropdown
 							text={filterType}

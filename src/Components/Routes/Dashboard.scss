@@ -8,8 +8,9 @@
 	overflow-y: auto;
 
 	.performance {
+		height: calc(100vh - 10rem);
 		border-radius: 50px;
-		background: var(--slate1-color);
+		background: var(--slate2-color);
 
 		padding: 35px;
 
@@ -20,10 +21,31 @@
 		top: 0;
 		left: 0;
 
-		.title {
-			font-size: 22px;
-			font-weight: 700;
-			color: var(--background-color);
+		display: grid;
+		grid-template-rows: min-content 1fr;
+
+		.header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			.title {
+				font-size: 22px;
+				font-weight: 700;
+				color: var(--background-color);
+			}
+
+			.DropdownComponent {
+				.trigger {
+					* {
+						color: #fff;
+					}
+				}
+			}
+		}
+
+		.chart {
+			padding-top: 1rem;
 		}
 	}
 
