@@ -31,14 +31,14 @@ export default function EditEvent(props: { eventID: string }) {
 				</div>
 				<div
 					className={`action active ${
-						!title || !description ? "disabled" : ""
+						!title.trim().length || !description.trim().length ? "disabled" : ""
 					}`}
 					onClick={() => {
-						if (!title || !description) return
+						if (!title.trim().length || !description.trim().length) return
 						modalStore.set(null)
 						EventsDB.Update(event.id, {
-							name: title,
-							description: description,
+							name: title.trim(),
+							description: description.trim(),
 						})
 					}}
 				>

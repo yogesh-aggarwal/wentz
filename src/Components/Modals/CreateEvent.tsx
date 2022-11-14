@@ -149,14 +149,25 @@ export default function CreateEvent(props: {
 				</div>
 				<div
 					className={`action active ${
-						!title || !description || !date || endTime === 23 ? "disabled" : ""
+						!title.trim().length ||
+						!description.trim().length ||
+						!date ||
+						endTime === 23
+							? "disabled"
+							: ""
 					}`}
 					onClick={() => {
-						if (!title || !description || !date || endTime === 23) return
+						if (
+							!title.trim().length ||
+							!description.trim().length ||
+							!date ||
+							endTime === 23
+						)
+							return
 						modalStore.set(null)
 						EventsDB.Create({
-							name: title,
-							description: description,
+							name: title.trim(),
+							description: description.trim(),
 							placeIndex: placeIndex,
 							endsAt: new Date(`${date} ${endTime}:00:00`).getTime(),
 							startsAt: new Date(`${date} ${startTime}:00:00`).getTime(),

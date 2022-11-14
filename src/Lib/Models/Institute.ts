@@ -2,6 +2,7 @@ import { doc } from "firebase/firestore"
 import { db } from "../Firebase"
 import { Model } from "../Model"
 import { institutesStore, instituteStore } from "../State"
+import { getTimestamp } from "../Utilites"
 
 export interface Institute_t {
 	id: string
@@ -31,7 +32,10 @@ class _Institutes extends Model<Institute_t> {
 		await this.PerformBatch((batch) => {
 			batch.set(
 				doc(db, this.collection, instituteStore.currentValue()?.id ?? ""),
-				data,
+				{
+					...data,
+					editedAt: getTimestamp(),
+				},
 				{ merge: true }
 			)
 		})

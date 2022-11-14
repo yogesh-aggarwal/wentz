@@ -96,7 +96,14 @@ class _Events extends Model<Event_t> {
 
 	async Update(id: string, data: Partial<Event_t>) {
 		await this.PerformBatch((batch) => {
-			batch.set(doc(db, this.collection, id), data, { merge: true })
+			batch.set(
+				doc(db, this.collection, id),
+				{
+					...data,
+					editedAt: getTimestamp(),
+				},
+				{ merge: true }
+			)
 		})
 	}
 }
