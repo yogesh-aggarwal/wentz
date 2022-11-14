@@ -1,26 +1,30 @@
-import "./Faculties.scss"
+import "./Faculties.scss";
 
-import { modalStore, useInstitute, useUser } from "../../Lib/State"
-import Route from "../Builders/Route"
-import Dropdown from "../Common/Dropdown"
-import Icon from "../Common/Icon"
-import User from "../Common/User"
-import { getIsCoordinator, UI } from "../../Lib/Utilites"
-import { InstitutesDB } from "../../Lib/Models/Institute"
-import { If } from "common-react-toolkit"
+import { modalStore, useInstitute, useUser } from "../../Lib/State";
+import Route from "../Builders/Route";
+import Dropdown from "../Common/Dropdown";
+import Icon from "../Common/Icon";
+import User from "../Common/User";
+import { getIsCoordinator, UI } from "../../Lib/Utilites";
+import { InstitutesDB } from "../../Lib/Models/Institute";
+import { If } from "common-react-toolkit";
+import AddFaculty from "../Modals/AddFaculty";
 
 export default function Faculties() {
-	const faculties = useInstitute((institute) => institute?.faculties)
+	const faculties = useInstitute((institute) => institute?.faculties);
 
-	useUser((user) => user?.id)
-	useInstitute((institute) => institute?.coordinator)
+	useInstitute((institute) => institute?.coordinator);
+	useUser((user) => user?.id);
+	useInstitute((institute) => institute?.coordinator);
 
-	if (!faculties) return <></>
+	if (!faculties) return <></>;
 	return (
 		<Route className="FacultiesComponent">
-			<div className="action">
-				<Icon name="plus" bold />
-			</div>
+			<If value={getIsCoordinator()}>
+				<div className="action" onClick={() => modalStore.set(<AddFaculty />)}>
+					<Icon name="plus" bold />
+				</div>
+			</If>
 			<div className="header">
 				<div className="title">Faculties</div>
 			</div>
@@ -40,10 +44,10 @@ export default function Faculties() {
 												onConfirm: async () => {
 													await InstitutesDB.Update({
 														faculties: faculties.filter((f) => f !== faculty),
-													})
-													modalStore.set(null)
+													});
+													modalStore.set(null);
 												},
-											})
+											});
 										},
 									},
 								]}
@@ -55,5 +59,5 @@ export default function Faculties() {
 				))}
 			</div>
 		</Route>
-	)
+	);
 }
