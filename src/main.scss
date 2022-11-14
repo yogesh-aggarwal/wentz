@@ -31,7 +31,6 @@ body {
 #root {
 	height: 100vh;
 	overflow: hidden;
-	zoom: 0.9;
 }
 
 i {
@@ -52,4 +51,19 @@ i {
 
 a {
 	text-decoration: none;
+}
+
+input,
+textarea {
+	width: 100%;
+	border: 2px solid var(--highlight-color);
+
+	padding: 15px 25px;
+	border-radius: 1rem;
+	font-size: 1.1rem;
+	outline: none;
+
+	&:focus {
+		border: 2px solid var(--primary-color);
+	}
 }

@@ -1,0 +1,13 @@
+.EditEventComponent {
+	.title {
+		padding-bottom: 1.5rem;
+	}
+
+	textarea {
+		margin-top: 1rem;
+		height: 30vh;
+		min-height: 10rem;
+		font-size: 1rem;
+		resize: none;
+	}
+}

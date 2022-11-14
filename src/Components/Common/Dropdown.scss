@@ -44,17 +44,17 @@
 
 		padding: 8px;
 
-		&::before {
-			content: "";
-			position: absolute;
-			top: 0;
-			right: 1rem;
-			width: 14px;
-			height: 14px;
-			transform: translate(-50%, -50%) rotate(45deg);
-			background: var(--highlight-color);
-			z-index: -10;
-		}
+		// &::before {
+		// 	content: "";
+		// 	position: absolute;
+		// 	top: 0;
+		// 	right: 1rem;
+		// 	width: 14px;
+		// 	height: 14px;
+		// 	transform: translate(-50%, -50%) rotate(45deg);
+		// 	background: var(--highlight-color);
+		// 	z-index: -10;
+		// }
 
 		.dropdown {
 			border-radius: inherit;

@@ -3,7 +3,13 @@ import "./EventView.scss"
 import { If, onUpdate } from "common-react-toolkit"
 import { useState } from "react"
 import { EventRequestStatus, EventsDB, Event_t } from "../../Lib/Models/Events"
-import { useEvents, useInstitute, useRouting, useUser } from "../../Lib/State"
+import {
+	modalStore,
+	useEvents,
+	useInstitute,
+	useRouting,
+	useUser,
+} from "../../Lib/State"
 import Icon from "../Common/Icon"
 import {
 	getIsCoordinator,
@@ -13,6 +19,7 @@ import {
 } from "../../Lib/Utilites"
 import User from "../Common/User"
 import Route from "../Builders/Route"
+import EditEvent from "../Modals/EditEvent"
 
 export default function EventView() {
 	const events = useEvents()
@@ -64,7 +71,12 @@ export default function EventView() {
 					>
 						<div className="actions">
 							<If value={event.status !== EventRequestStatus.Rejected}>
-								<div className="action" onClick={() => {}}>
+								<div
+									className="action"
+									onClick={() => {
+										modalStore.set(<EditEvent eventID={event.id} />)
+									}}
+								>
 									<Icon name="edit" size={13} />
 									<span>Edit</span>
 								</div>
