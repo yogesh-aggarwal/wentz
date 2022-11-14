@@ -1,7 +1,7 @@
 import "./EventView.scss"
 
 import { If, onUpdate } from "common-react-toolkit"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { EventRequestStatus, EventsDB, Event_t } from "../../Lib/Models/Events"
 import {
 	modalStore,
@@ -33,6 +33,17 @@ export default function EventView() {
 	onUpdate(() => {
 		setEvent(events[eventID])
 	}, [eventID, events])
+
+	useEffect(() => {
+		function escCloseWorker(event: KeyboardEvent) {
+			if (event.key === "Escape") routingStore.set("dashboard")
+		}
+		document.addEventListener("keydown", escCloseWorker)
+
+		return () => {
+			document.removeEventListener("keydown", escCloseWorker)
+		}
+	})
 
 	if (!event) return <></>
 	return (

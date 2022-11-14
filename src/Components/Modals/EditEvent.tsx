@@ -30,8 +30,11 @@ export default function EditEvent(props: { eventID: string }) {
 					<span>Cancel</span>
 				</div>
 				<div
-					className="action active"
+					className={`action active ${
+						!title || !description ? "disabled" : ""
+					}`}
 					onClick={() => {
+						if (!title || !description) return
 						modalStore.set(null)
 						EventsDB.Update(event.id, {
 							name: title,
