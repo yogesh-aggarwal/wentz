@@ -92,10 +92,8 @@ export class Model<T> {
 	protected async PerformBatch(
 		callback: (batch: WriteBatch) => void | Promise<void>
 	) {
-		if (!getUserID()) {
-			await authenticate()
-			return
-		}
+		if (!getUserID()) return
+
 		const batch = writeBatch(db)
 		await callback(batch)
 		await batch.commit()

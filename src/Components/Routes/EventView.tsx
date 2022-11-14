@@ -118,7 +118,11 @@ export default function EventView() {
 					<div className="organizer">
 						<div className="place">
 							<Icon name="building" />
-							<span>Vivekananda Hall</span>
+							<span>
+								{event.placeIndex === 0
+									? "VIPS-TC Auditorium"
+									: "Vivekananda Hall"}
+							</span>
 						</div>
 						<User id={event.createdBy} />
 					</div>
