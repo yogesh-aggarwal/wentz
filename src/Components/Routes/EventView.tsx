@@ -64,9 +64,12 @@ export default function EventView() {
 								</span>
 							</div>
 						</div>
-						{/* <div className="cta">
-							<Icon name="angle-right" />
-						</div> */}
+						<div
+							className="cta"
+							onClick={() => navigator.clipboard.writeText(location.href)}
+						>
+							<Icon name="share" />
+						</div>
 					</div>
 				</div>
 				<div className="bottom">
@@ -79,7 +82,7 @@ export default function EventView() {
 						<div className="actions">
 							<If value={event.status !== EventRequestStatus.Rejected}>
 								<div
-									className="action"
+									className="action active"
 									onClick={() => {
 										modalStore.set(<EditEvent eventID={event.id} />)
 									}}

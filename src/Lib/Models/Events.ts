@@ -1,10 +1,12 @@
 import { arrayRemove, arrayUnion, doc } from "firebase/firestore"
+import { BANNERS } from "../Constants"
 import { db } from "../Firebase"
 import { Model } from "../Model"
 import { eventsStore, instituteStore } from "../State"
 import {
 	generateID,
 	getIsCoordinator,
+	getRandomInt,
 	getTimestamp,
 	getUserID,
 } from "../Utilites"
@@ -51,7 +53,7 @@ class _Events extends Model<Event_t> {
 		const data = {
 			...meta,
 			id: generateID(),
-			banner: "https://wallpapercave.com/wp/wp10651219.jpg",
+			banner: BANNERS[getRandomInt(0, BANNERS.length - 1)],
 			createdAt: getTimestamp(),
 			editedAt: getTimestamp(),
 			createdBy: getUserID(),
