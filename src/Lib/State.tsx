@@ -9,7 +9,11 @@ import { ThemeType_t } from "./Types/Theme"
 //----------------------------------------------------------------------------------------------
 // State stores (so called "Current Stores")
 //----------------------------------------------------------------------------------------------
-export const [userStore, useUser] = makeStore<User_t | null>(null)
+export const [userStore, useUser] = makeStore<User_t | null>(
+	null,
+	{},
+	{ storeID: "concerns.user" }
+)
 export const [instituteStore, useInstitute] = makeStore<Institute_t | null>(
 	null,
 	{}

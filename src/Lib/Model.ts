@@ -6,7 +6,7 @@ import {
 	WriteBatch,
 	writeBatch,
 } from "firebase/firestore"
-import { authWithGoogle } from "./Auth"
+import { authenticate } from "./Auth"
 import { db } from "./Firebase"
 import { instituteStore } from "./State"
 import { Map } from "./Types/Misc"
@@ -93,7 +93,7 @@ export class Model<T> {
 		callback: (batch: WriteBatch) => void | Promise<void>
 	) {
 		if (!getUserID()) {
-			await authWithGoogle()
+			await authenticate()
 			return
 		}
 		const batch = writeBatch(db)

@@ -1,10 +1,14 @@
 import "./Login.scss"
 
-import { authWithGoogle } from "../../Lib/Auth"
+import { authenticate } from "../../Lib/Auth"
 import Icon from "./Icon"
 import Logo from "../../Assets/logo.png"
+import { useState } from "react"
 
 export default function Login() {
+	const [email, setEmail] = useState<string>("")
+	const [password, setPassword] = useState<string>("")
+
 	return (
 		<div className="LoginComponent">
 			<div className="form">
@@ -14,14 +18,27 @@ export default function Login() {
 
 				<div className="input">
 					<Icon name="envelope" />
-					<input type="text" placeholder="Email" />
+					<input
+						type="text"
+						placeholder="Email"
+						onChange={(e) => setEmail(e.target.value)}
+					/>
 				</div>
 				<div className="input">
 					<Icon name="key" />
-					<input type="password" placeholder="Password" />
+					<input
+						type="password"
+						placeholder="Password"
+						onChange={(e) => setPassword(e.target.value)}
+					/>
 				</div>
 
-				<div className="button" onClick={authWithGoogle}>
+				<div
+					className="button"
+					onClick={() => {
+						authenticate(email, password)
+					}}
+				>
 					<Icon name="sign-in bold" />
 					<span>Login</span>
 				</div>

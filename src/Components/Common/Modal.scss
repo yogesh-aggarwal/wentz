@@ -22,6 +22,8 @@
 		background: var(--highlight-color);
 		opacity: 0;
 		pointer-events: none;
+
+		filter: blur(10px) brightness(0.95);
 	}
 
 	&.show {

@@ -12,7 +12,7 @@ import {
 	useNavigate,
 	useParams,
 } from "react-router-dom"
-import { authWithGoogle, initAuthListener } from "../Lib/Auth"
+import { authenticate, initAuthListener } from "../Lib/Auth"
 import { InstitutesDB } from "../Lib/Models/Institute"
 import {
 	instituteStore,
@@ -108,6 +108,7 @@ export default function App() {
 			<Modal />
 			<Components.LifecycleMaintainer />
 			<Routes>
+				<Route path="" element={<Navigate to={"vips"} />} />
 				<Route path=":instituteID" element={<Components.Institute />}>
 					<Route path="" element={<Navigate to={"dashboard"} replace />} />
 					<Route path="*" element={<Navigate to={"dashboard"} replace />} />

@@ -9,15 +9,17 @@ export default function User(props: {
 	short?: boolean
 	hideRole?: boolean
 }) {
-	const user = useUsers((users) => users[props.id]) ?? {
-		dp: "https://bit.ly/3hF4ZYv",
-		name: "Deepali Virmani",
-		role: UserRole_t.Coordinator,
-	}
+	const user = useUsers(
+		(users) =>
+			users[props.id] ?? {
+				name: "Unknown User",
+				dp: "https://pngimg.com/uploads/football/small/football_PNG52797.png",
+			}
+	)
 	onUpdate(() => UsersDB.Listen(props.id), [props.id])
 	const coordinatorID = useInstitute((institute) => institute?.coordinator)
 
-	if (!user) return <></>
+	if (!user) return <div></div>
 	return (
 		<div className={`UserComponent ${props.short ? "short" : ""}`}>
 			<img src={user.dp} alt="" />
