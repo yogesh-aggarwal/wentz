@@ -1,7 +1,7 @@
 import "./App.scss"
 
 import { onMount, onUpdate } from "common-react-toolkit"
-import { lazy } from "react"
+import { lazy, useEffect } from "react"
 import {
 	BrowserRouter,
 	Navigate,
@@ -41,6 +41,28 @@ namespace Components {
 
 		const events = useInstitute((institute) => institute?.events ?? [])
 		onUpdate(() => EventsDB.ListenMany(events), [events])
+
+		useEffect(() => {
+			function escCloseWorker(event: KeyboardEvent) {
+				if (event.key === "F1") {
+					event.preventDefault()
+					routingStore.set("calendar")
+				}
+				if (event.key === "F2") {
+					event.preventDefault()
+					routingStore.set("dashboard")
+				}
+				if (event.key === "F3") {
+					event.preventDefault()
+					routingStore.set("faculties")
+				}
+			}
+			document.addEventListener("keydown", escCloseWorker)
+
+			return () => {
+				document.removeEventListener("keydown", escCloseWorker)
+			}
+		})
 
 		// Routing
 		onUpdate(() => {
