@@ -16,7 +16,6 @@ export default function CreateEvent(props: {
 	const [startTime, setStartTime] = useState<number>(9)
 	const [endTime, setEndTime] = useState<number>(23)
 	const [date, setDate] = useState<string>(props.date)
-	console.log(date)
 
 	const occupiedSlots = useEvents((events) => {
 		const occupied: {
@@ -28,10 +27,10 @@ export default function CreateEvent(props: {
 			if (!occupied[event.placeIndex]) occupied[event.placeIndex] = []
 			for (
 				let i = new Date(event.startsAt).getHours();
-				i <= new Date(event.endsAt).getHours();
+				i < new Date(event.endsAt).getHours();
 				++i
 			) {
-				const day = new Date(event.startsAt).getDay() + 1
+				const day = new Date(event.startsAt).getDate()
 				if (!occupied[event.placeIndex][day])
 					occupied[event.placeIndex][day] = []
 				occupied[event.placeIndex][day].push(i)
@@ -81,38 +80,51 @@ export default function CreateEvent(props: {
 					}}
 				/>
 			</div>
+
 			<div className="time-slots">
 				<span>Start at</span>
 				<div className="slots">
 					{Array.from(Array(12).keys())
 						.map((i) => i + 9)
-						.map((i) => (
-							<div
-								key={i}
-								className={`slot available ${
-									startTime === i ? "selected" : ""
-								}`}
-								onClick={() => {
-									if (i >= endTime) return
-									setStartTime(i)
-								}}
-							>
-								{i > 12 ? i - 12 : i} {i < 12 ? "AM" : "PM"}
-							</div>
-						))}
+						.map((i) => {
+							const isAvailable =
+								!occupiedSlots[placeIndex]?.[
+									new Date(date).getDate()
+								]?.includes(i)
+							return (
+								<div
+									key={i}
+									className={`slot ${isAvailable ? "available" : ""} ${
+										startTime === i ? "selected" : ""
+									}`}
+									onClick={() => {
+										if (i >= endTime) return
+										setStartTime(i)
+									}}
+								>
+									{i > 12 ? i - 12 : i} {i < 12 ? "AM" : "PM"}
+								</div>
+							)
+						})}
 				</div>
 			</div>
 			<div className="time-slots">
 				<span>End at</span>
 				<div className="slots">
-					{Array.from(Array(12).keys())
+					{Array.from(Array(13).keys())
 						.map((i) => i + 9)
 						.map((i) => {
-							const isAvailable =
-								startTime < i &&
-								!(
-									occupiedSlots[placeIndex][new Date().getDate()] ?? []
-								).includes(i)
+							const occupied =
+								occupiedSlots[placeIndex][new Date(date).getDate()]
+							let maxEnd = 0
+							for (const end of occupied) {
+								if (end > startTime) {
+									maxEnd = end
+									break
+								}
+							}
+							const isAvailable = i <= maxEnd && i > startTime
+
 							return (
 								<div
 									key={i}
@@ -130,6 +142,7 @@ export default function CreateEvent(props: {
 						})}
 				</div>
 			</div>
+
 			<div className="actions">
 				<div className="action" onClick={() => modalStore.set(null)}>
 					<span>Cancel</span>
