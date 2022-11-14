@@ -184,8 +184,12 @@ export default function CreateEvent(props: {
 							name: title.trim(),
 							description: description.trim(),
 							placeIndex: placeIndex,
-							endsAt: new Date(`${date} ${endTime}:00:00`).getTime(),
-							startsAt: new Date(`${date} ${startTime}:00:00`).getTime(),
+							endsAt: new Date(
+								`${date} ${endTime <= 20 ? endTime + 1 : endTime}:00:00`
+							).getTime(),
+							startsAt: new Date(
+								`${date} ${startTime > 9 ? startTime - 1 : startTime}:00:00`
+							).getTime(),
 						})
 					}}
 				>
