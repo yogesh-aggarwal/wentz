@@ -193,7 +193,7 @@ export default function CreateEvent(props: {
 						})
 					}}
 				>
-					<span>Update</span>
+					<span>Create</span>
 				</div>
 			</div>
 		</div>
