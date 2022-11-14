@@ -35,10 +35,10 @@ export default function EventView() {
 		setEvent(events[eventID])
 	}, [eventID, events])
 
-	onUpdate(() => {
-		if (eventIDS.includes(eventID)) return
-		routingStore.set("/dashboard")
-	}, [eventIDS, eventID])
+	// onUpdate(() => {
+	// 	if (eventIDS.includes(eventID)) return
+	// 	routingStore.set("/dashboard")
+	// }, [eventIDS, eventID])
 
 	if (!event) return <></>
 	return (
