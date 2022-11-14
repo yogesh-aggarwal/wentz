@@ -2,7 +2,7 @@ import "./Calendar.scss"
 
 import { If, makeStore } from "common-react-toolkit"
 import { useMemo } from "react"
-import { MONTH_NAMES } from "../../Lib/Constants"
+import { MONTH_NAMES, WEEK_DAYS } from "../../Lib/Constants"
 import { Event_t } from "../../Lib/Models/Events"
 import { modalStore, routingStore, useEvents } from "../../Lib/State"
 import { Map } from "../../Lib/Types/Misc"
@@ -120,7 +120,10 @@ export default function Calendar() {
 				{Array.from({ length: daysInMonth(month, year) }, (_, i) =>
 					(i + 1).toString()
 				).map((day) => (
-					<div key={`day-${day}`} className="day">
+					<div
+						key={`day-${day}`}
+						className={`day ${+day === 6 ? "sunday" : ""}`}
+					>
 						<div className="info">
 							<If value={new Date().getDate() === +day}>
 								<div className="today">
@@ -128,7 +131,9 @@ export default function Calendar() {
 								</div>
 							</If>
 							<div className="group">
-								<div className="day-name">Mon</div>
+								<div className="day-name">
+									{WEEK_DAYS[new Date(`${year}-${month}-${day}`).getDay()]}
+								</div>
 								<div className="date">{day}</div>
 							</div>
 						</div>

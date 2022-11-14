@@ -4,6 +4,8 @@ import { authenticate } from "../../Lib/Auth"
 import Icon from "./Icon"
 import Logo from "../../Assets/logo.png"
 import { useState } from "react"
+import { modalStore } from "../../Lib/State"
+import Message from "../Modals/Message"
 
 export default function Login() {
 	const [email, setEmail] = useState<string>("")
@@ -36,7 +38,11 @@ export default function Login() {
 				<div
 					className="button"
 					onClick={() => {
-						authenticate(email, password)
+						try {
+							authenticate(email, password)
+						} catch {
+							modalStore.set(<Message message="Email or Password is wrong." />)
+						}
 					}}
 				>
 					<Icon name="sign-in bold" />

@@ -97,6 +97,10 @@
 			border-bottom: $border;
 			height: 85px;
 
+			&.sunday {
+				opacity: 0.5;
+			}
+
 			.info {
 				border-right: $border;
 				display: flex;
