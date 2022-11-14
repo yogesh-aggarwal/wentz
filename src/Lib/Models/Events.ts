@@ -1,10 +1,4 @@
-import {
-	arrayRemove,
-	arrayUnion,
-	deleteDoc,
-	doc,
-	setDoc,
-} from "firebase/firestore"
+import { arrayRemove, arrayUnion, doc } from "firebase/firestore"
 import { db } from "../Firebase"
 import { Model } from "../Model"
 import { eventsStore, instituteStore } from "../State"
@@ -49,7 +43,6 @@ class _Events extends Model<Event_t> {
 
 	async Create(meta: {
 		name: string
-		banner: string
 		description: string
 		placeIndex: number
 		startsAt: number
@@ -58,6 +51,7 @@ class _Events extends Model<Event_t> {
 		const data = {
 			...meta,
 			id: generateID(),
+			banner: "https://wallpapercave.com/wp/wp10651219.jpg",
 			createdAt: getTimestamp(),
 			editedAt: getTimestamp(),
 			createdBy: getUserID(),

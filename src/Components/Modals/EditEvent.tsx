@@ -17,10 +17,12 @@ export default function EditEvent(props: { eventID: string }) {
 			<input
 				type="text"
 				value={title}
+				placeholder="Title"
 				onChange={(e) => setTitle(e.target.value)}
 			/>
 			<textarea
 				value={description}
+				placeholder="Description"
 				onChange={(e) => setDescription(e.target.value)}
 			/>
 			<div className="actions">

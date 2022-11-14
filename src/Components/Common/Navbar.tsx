@@ -42,9 +42,9 @@ export default function Navbar() {
 				</div>
 			</div>
 			<div className="right">
-				<div className="search">
+				{/* <div className="search">
 					<Icon name="search" />
-				</div>
+				</div> */}
 				<Dropdown options={[{ name: "Logout", onClick: logout }]}>
 					<div className="user">
 						<User id={userID} />

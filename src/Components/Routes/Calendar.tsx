@@ -1,15 +1,16 @@
 import "./Calendar.scss"
 
-import { If, makeStore, onUpdate } from "common-react-toolkit"
+import { If, makeStore } from "common-react-toolkit"
+import { useMemo } from "react"
 import { MONTH_NAMES } from "../../Lib/Constants"
-import { EventsDB, Event_t } from "../../Lib/Models/Events"
-import { routingStore, useEvents } from "../../Lib/State"
+import { Event_t } from "../../Lib/Models/Events"
+import { modalStore, routingStore, useEvents } from "../../Lib/State"
 import { Map } from "../../Lib/Types/Misc"
 import { visualTime } from "../../Lib/Utilites"
 import Route from "../Builders/Route"
 import Icon from "../Common/Icon"
 import User from "../Common/User"
-import { useMemo, useState } from "react"
+import CreateEvent from "../Modals/CreateEvent"
 
 const MILLISECONDS_IN_AN_HOUR = 3.6e6
 
@@ -135,7 +136,14 @@ export default function Calendar() {
 							<div
 								key={`place-${placeIndex}`}
 								className="events"
-								onClick={() => {}}
+								onClick={() => {
+									modalStore.set(
+										<CreateEvent
+											placeIndex={placeIndex}
+											date={`${year}-${month}-${+day < 10 ? "0" + day : day}`}
+										/>
+									)
+								}}
 							>
 								{(days[day] ?? [])
 									.filter((event) => event.placeIndex === placeIndex)
@@ -144,16 +152,20 @@ export default function Calendar() {
 											<div
 												key={event.id}
 												className={`event ${
-													2 > new Date(event.startsAt).getDate()
+													new Date().getDate() >
+													new Date(event.startsAt).getDate()
 														? "diminished"
 														: ""
 												} ${
-													new Date(event.startsAt).getHours() <
-														new Date().getHours() &&
-													new Date(event.endsAt).getHours() >
-														new Date().getHours()
-														? "ongoing"
-														: ""
+													// prettier-ignore
+													new Date().getDate() === new Date(event.startsAt).getDate()
+                                       &&
+													(
+                                          new Date(event.startsAt).getHours() < new Date().getHours() &&
+													   new Date(event.endsAt).getHours() > new Date().getHours()
+                                       )
+                                          ? "ongoing"
+                                          : ""
 												}`}
 												style={{
 													left: `${

@@ -1,0 +1,96 @@
+.CreateEventComponent {
+	.title {
+		padding-bottom: 1.5rem;
+	}
+
+	textarea {
+		margin-top: 1rem;
+		height: 20vh;
+		min-height: 10rem;
+		font-size: 1rem;
+		resize: none;
+	}
+
+	.places {
+		margin-top: 1rem;
+		margin-bottom: 2rem;
+
+		gap: 1rem;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+
+		.place {
+			gap: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 8px 0;
+			border-radius: 1rem;
+			background: var(--highlight-color);
+			cursor: pointer;
+
+			i {
+				font-size: 14px;
+			}
+
+			span {
+				font-size: 15px;
+			}
+
+			&.selected {
+				background: var(--primary-color);
+			}
+		}
+	}
+
+	.time-slots {
+		gap: 1rem;
+		display: grid;
+		grid-template-columns: 5rem 1fr;
+
+		margin: 1.5rem 0;
+
+		span {
+			font-size: 1.1rem;
+			font-weight: 500;
+		}
+
+		&.date {
+			align-items: center;
+			padding-bottom: 1rem;
+
+			input {
+				font-weight: 500;
+				font-size: 15px;
+				border-radius: 8px;
+				padding: 10px 15px;
+				font-family: "Roboto Mono";
+			}
+		}
+
+		.slots {
+			gap: 10px;
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+
+			.slot {
+				font-size: 14px;
+				padding: 5px 12px;
+				background: var(--highlight-color);
+				border-radius: 8px;
+				cursor: pointer;
+				opacity: 0.5;
+				pointer-events: none;
+
+				&.selected {
+					background: var(--primary-color);
+				}
+				&.available {
+					opacity: 1;
+					pointer-events: all;
+				}
+			}
+		}
+	}
+}

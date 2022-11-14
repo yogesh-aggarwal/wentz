@@ -5,6 +5,7 @@ import { useState } from "react"
 import { EventRequestStatus, EventsDB, Event_t } from "../../Lib/Models/Events"
 import {
 	modalStore,
+	routingStore,
 	useEvents,
 	useInstitute,
 	useRouting,
@@ -87,6 +88,8 @@ export default function EventView() {
 									UI.openConfirmModal({
 										message: "Are you sure you want to delete this event?",
 										onConfirm: () => {
+											modalStore.set(null)
+											routingStore.set("dashboard")
 											EventsDB.Delete(event.id)
 										},
 									})
